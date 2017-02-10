@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<link rel="stylesheet" type="text/css" href="/css/browser.css" />
+<title th:text="${groupId}">Group File Browser</title>
+</head>
+<body>
+	<div>
+		<h2 th:text="'File List for '+${groupId}">Group file list</h2>
+		<h3 th:text="'Number of Days: '+${days.size()}">Number of files 0</h3>
+		<div class="fileNameColumn fileColumnHeader">File Name</div><div class="fileColumnHeader fileDateColumn">File Date</div><div class=" fileSizeColumn fileColumnHeader">File Size</div>
+		<div th:each="day : ${days.keySet()}">
+			<span th:text="${day}">The day String</span> 
+			<div th:each="file : ${days.get(day)}">
+				<a th:href="@{/getFile(group=${groupId},file=${file.getName()})}">
+					<div th:text="${file.getName()}" class="fileNameColumn">file name</div>
+				</a>
+				
+				<div th:text="${file.getDate()}" class="fileDateColumn">file date</div>
+				
+				<div th:text="${file.getSize()}" class="fileSizeColumn">file Size</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
