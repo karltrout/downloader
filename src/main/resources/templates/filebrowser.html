@@ -2,26 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1" />
+<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/browser.css" />
 <title th:text="${groupId}">Group File Browser</title>
 </head>
 <body>
-	<div>
-		<h2 th:text="'File List for '+${groupId}">Group file list</h2>
-		<h3 th:text="'Number of Days: '+${days.size()}">Number of files 0</h3>
-		<div class="fileNameColumn fileColumnHeader">File Name</div><div class="fileColumnHeader fileDateColumn">File Date</div><div class=" fileSizeColumn fileColumnHeader">File Size</div>
-		<div th:each="day : ${days.keySet()}">
-			<span th:text="${day}">The day String</span> 
-			<div th:each="file : ${days.get(day)}">
-				<a th:href="@{/getFile(group=${groupId},file=${file.getName()})}">
-					<div th:text="${file.getName()}" class="fileNameColumn">file name</div>
-				</a>
-				
-				<div th:text="${file.getDate()}" class="fileDateColumn">file date</div>
-				
-				<div th:text="${file.getSize()}" class="fileSizeColumn">file Size</div>
+	<div class="application">
+		<div class="menu">
+			<div class="menuItem">
+				<div th:text="'Number of Days: '+${days.size()}" class="menuText">Number of files 0</div>
+				<div th:text="'File List for '+${groupId}" class="menuText">Group file list</div>
 			</div>
+			<div class="searchText">
+				<input id="textSearch" type="text" class="search" placeHolder="SEARCH"/>
+				<div id="searchResults" class="searchResults">RESULTS....</div>
+			</div>
+		</div>
+		<div class="mainBody">
+		<div th:each="day : ${days.keySet()}" class="day">
+			<span th:text="${day}">The day String</span> 
+			<div class="fileHeader">
+				<div class="fileColumnHeader fileNameSort">File Name <div class="fileNameArrow arrow-up"></div></div><div class="fileColumnHeader modifiedSort">Last Modified <div class="modifiedArrow arrow-down"></div></div><div class="fileColumnHeader fileSizeColumn">Size</div>
+			</div>
+			<div class="dayfileRows">	
+				<div th:each="file : ${days.get(day)}" class="fileRow">
+					<div class="fileNameColumn">
+						<a th:href="@{/getFile(group=${groupId},file=${file.getName()})}" th:text="${file.getName()}">The File Name</a>
+					</div>
+					<div th:text="${file.getDate()}" class="fileDateColumn">file date</div>
+					
+					<div th:text="${file.getSize()}" class="fileSizeColumn fileSizeCell">file Size</div>
+				</div>
+			</div>
+		</div>
 		</div>
 	</div>
 </body>
+
+<script type="text/javascript" src="/js/browser.js"></script>
 </html>
