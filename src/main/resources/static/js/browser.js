@@ -3,8 +3,13 @@
 // --------------------------------------------------------------------------------------
 
 $(".fileNameSort").click( function(){
-	$( this ).parents("div.day").find( "div.fileNameArrow" ).toggleClass( "arrow-up" );
-	$( this ).parents("div.day").find( "div.fileNameArrow" ).toggleClass( "arrow-down" );
+	assc = $( this ).hasClass( "assending" );
+	$( this ).parents("div.day").find( "div.fileNameArrowUp" ).toggleClass( "arrow-up", assc ).css("border-bottom-color", "#fff");
+	$( this ).parents("div.day").find( "div.fileNameArrowDown" ).toggleClass( "arrow-down", !assc ).css("border-top-color", "#fff");
+
+	$( this ).parents("div.day").find( "div.modifiedArrowUp" ).toggleClass( "arrow-up", true ).css("border-bottom-color", "#25649f");
+	$( this ).parents("div.day").find( "div.modifiedArrowDown" ).toggleClass( "arrow-down", true ).css("border-top-color", "#25649f");
+	
 	$( this ).toggleClass( "assending" );
 	
 	sortRows($( this ).parents("div.day").find("div.dayfileRows"), ".fileNameColumn",  $( this ).hasClass( "assending" ));
@@ -12,8 +17,12 @@ $(".fileNameSort").click( function(){
 });
 
 $(".modifiedSort").click( function(){
-	$( this ).parents("div.day").find( "div.modifiedArrow" ).toggleClass( "arrow-up" );
-	$( this ).parents("div.day").find( "div.modifiedArrow" ).toggleClass( "arrow-down" );
+	assc = $( this ).hasClass( "assending" );
+	$( this ).parents("div.day").find( "div.modifiedArrowUp" ).toggleClass( "arrow-up", assc ).css("border-bottom-color", "#fff");
+	$( this ).parents("div.day").find( "div.modifiedArrowDown" ).toggleClass( "arrow-down", !assc ).css("border-top-color", "#fff");
+
+	$( this ).parents("div.day").find( "div.fileNameArrowUp" ).toggleClass( "arrow-up", true ).css("border-bottom-color", "#25649f");
+	$( this ).parents("div.day").find( "div.fileNameArrowDown" ).toggleClass( "arrow-down", true ).css("border-top-color", "#25649f");
 	$( this ).toggleClass( "assending" );
 
 	sortRows($( this ).parents("div.day").find("div.dayfileRows"), ".fileDateColumn",  $( this ).hasClass( "assending" ));
@@ -86,3 +95,5 @@ function sortRows(dayDiv, column, sortDecending) {
     
     dayDiv.html(alphabeticallyOrderedDivs);
 };
+
+$("div.mainBody").height($( window ).height() - 98 ); //66 is the size of the header + body margin

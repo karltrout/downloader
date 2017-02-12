@@ -1,12 +1,13 @@
 package gov.faa.web;
 
 import java.io.File;
+import java.net.URLConnection;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -36,12 +37,12 @@ public class FileBrowserController {
 			logger.error("Could not create Storage Directory :"+sourceDirectory.getAbsolutePath());
 		}
 		
-		HashMap<String, ArrayList<FileObject>> days = new HashMap<>();
+		TreeMap<Date, ArrayList<FileObject>> days = new TreeMap<>(Collections.reverseOrder());
 		
 		File[] files = sourceDirectory.listFiles();
 		
 		for(File file: files){
-			String dateString = DateFormat.getDateInstance().format(file.lastModified());
+			Date dateString = new Date(file.lastModified()); //DateFormat.getDateInstance().format(file.lastModified());
 			
 			if( days.get(dateString) != null)
 				days.get(dateString).add(new FileObject(file));
@@ -52,6 +53,7 @@ public class FileBrowserController {
 				days.put(dateString, newList);
 			}
 		}
+		
     	
     	model.addAttribute("groupId", groupId);
     	model.addAttribute("days", days);
@@ -64,11 +66,15 @@ public class FileBrowserController {
 		private String name;
 		private Date date;
 		private double size;
+		private String type = "unknown";
+		private String icon = "/images/default.png";
 		
 		FileObject(File file){
 			this.setName(file.getName());
 			this.setDate(new Date(file.lastModified()));
 			this.setSize((file.length()/1024));
+			this.setType(URLConnection.guessContentTypeFromName(file.getName()));
+			if (this.type == null || this.type.isEmpty()) setType("unknown");
 		}
 
 		/**
@@ -111,6 +117,44 @@ public class FileBrowserController {
 		 */
 		private void setSize(double size) {
 			this.size = size;
+		}
+
+		/**
+		 * @return the type
+		 */
+		public String getType() {
+			return type;
+		}
+
+		/**
+		 * @param type the type to set
+		 */
+		private void setType(String type) {
+			this.type = type;
+			setIcon();
+		}
+
+		private void setIcon() {
+			if(this.type != null){
+				switch (this.type){
+				case "application/pdf":
+					this.icon = "/images/pdf.png";
+					break;
+				case "application/rtf":
+					this.icon = "/images/doc.png";
+					break;
+				case "text/plain":
+					this.icon = "/images/doc.png";
+					break;
+				default:
+					this.icon = "/images/zip.png";
+					break;
+				}
+			}
+		}
+		
+		public String getIcon(){
+			return this.icon;
 		}
 	}
     

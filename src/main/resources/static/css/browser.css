@@ -6,11 +6,24 @@ body {
 		"Segoe UI Symbol";
 	font-size: 14px;
 	line-height: 1.5;
-
 }
 
-.application{
+.application {
+	
+}
 
+.groupId {
+	font-size: xx-large;
+	font-weight: bolder;
+	display: inline-block;
+	padding-left: 20px;
+	vertical-align: top;
+}
+
+.logo {
+	height: 45px;
+	width: 45px;
+	display: inline-block;
 }
 
 .mainBody {
@@ -21,12 +34,12 @@ body {
 	border-top: 0;
 	padding: 10px 20px 5px 20px;
 	overflow-y: scroll;
-	
 }
 
 .menu {
 	background-color: #25649f;
-	color: white; border-radius : 10px 10px 0px 0px;
+	color: white;
+	border-radius: 10px 10px 0px 0px;
 	border: 1px solid #ccc;
 	border-top: 0;
 	height: 50px;
@@ -39,6 +52,7 @@ body {
 .menuText {
 	font-size: 16px;
 	font-weight: bold;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.76);
 }
 
 .menuItem {
@@ -70,7 +84,7 @@ body {
 	position: absolute;
 	top: 40px;
 	left: 10px;
-	padding:10px;
+	padding: 10px;
 }
 
 .day {
@@ -112,6 +126,13 @@ body {
 	cursor: pointer;
 }
 
+a.fileLink {
+	display: inline-block;
+	width: 260px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .fileDateColumn {
 	width: 286px;
 	display: inline-block;
@@ -125,6 +146,23 @@ body {
 	text-align: right;
 }
 
+.fileColumnHeader.fileTypeColumn {
+	width: 180px;
+}
+
+.fileTypeColumn {
+	width: 250px;
+	display: inline-block;
+	text-align: right;
+}
+
+.typeIcon {
+	margin-left: 10px;
+	height: 24px;
+	width: 20px;
+	vertical-align: text-bottom;
+}
+
 .fileSizeCell {
 	margin: 10px 0px 10px 0px;
 }
@@ -133,13 +171,25 @@ body {
 	
 }
 
+.modifiedSort {
+	cursor: pointer;
+}
+
+.fileNameSort {
+	cursor: pointer;
+}
+
+.sort-arrows {
+	display: inline-block;
+}
+
 .arrow-up {
 	width: 0;
 	height: 0;
 	border-left: 5px solid transparent;
 	border-right: 5px solid transparent;
-	border-bottom: 5px solid white;
-	display: inline-block;
+	border-bottom: 5px solid #25649f;
+	margin-bottom: 2px;
 }
 
 .arrow-down {
@@ -147,8 +197,8 @@ body {
 	height: 0;
 	border-left: 5px solid transparent;
 	border-right: 5px solid transparent;
-	border-top: 5px solid white;
-	display: inline-block;
+	border-top: 5px solid #25649f;
+	margin-top: 2px;
 }
 
 .arrow-right {
