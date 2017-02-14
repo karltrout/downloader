@@ -19,7 +19,7 @@
 		</div>
 		<div class="mainBody">
 		<div th:each="day : ${days.keySet()}" class="day">
-			<span th:text="${#dates.format(day, 'dd-MMM-yyyy')}">The day String</span> 
+			<span th:text="${day}">The day String</span> 
 			<div class="fileHeader">
 				<div class="fileColumnHeader fileNameSort">File Name <div class="sort-arrows"><div class="fileNameArrowUp arrow-up"></div><div class="fileNameArrowDown arrow-down"></div></div></div>
 				<div class="fileColumnHeader modifiedSort">Last Mod  <div class="sort-arrows"><div class="modifiedArrowUp arrow-up"></div><div class="modifiedArrowDown arrow-down"></div></div></div>
