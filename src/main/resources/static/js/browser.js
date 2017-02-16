@@ -97,3 +97,9 @@ function sortRows(dayDiv, column, sortDecending) {
 };
 
 $("div.mainBody").height($( window ).height() - 98 ); //66 is the size of the header + body margin
+
+$( document ).ready( function(){
+	
+	connect();
+	
+})
