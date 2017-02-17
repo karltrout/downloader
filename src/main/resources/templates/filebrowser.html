@@ -21,13 +21,16 @@
 					<a href="https://www.faa.gov/"><img alt="Logo"
 						src="/images/logoFAA.png" class="logo" /></a>
 				</div>
-				<div th:text="${groupId}" class="groupId">Group file list</div>
+				<div class="productId">
+					<span th:text="${groupId}" class="groupId">Group file list</span>
+					<div th:if="${user?.authenticated}" class="login">
+						<a class="login" th:text="'Welcome '+${user.getUsername()}+', logout...'" th:href="'/fileBrowser/'+${groupId}">Welcome admin</a>
+					</div>
+					<div th:unless="${user?.authenticated}" class="login">
+						<a class="login" id="login">Login...</a>
+					</div>
+				</div>
 			</div>
-			<div th:if="${user?.authenticated}" class="login">
-				<div th:text="'Welcome '+${user.getUsername()}">Welcome admin</div>
-				<div><span>logout...</span></div>
-			</div>
-			<div th:unless="${user?.authenticated}" class="login" id="login">login...</div>
 			<div class="searchText">
 				<input id="textSearch" type="text"  class="search" placeholder="SEARCH..." />
 				<div id="searchResults" class="searchResults">RESULTS....</div>
@@ -47,7 +50,7 @@
 						</div>
 					</div>
 					<div class="fileColumnHeader modifiedSort">
-						Last Mod
+						Last Modification
 						<div class="sort-arrows">
 							<div class="modifiedArrowUp arrow-up"></div>
 							<div class="modifiedArrowDown arrow-down"></div>
@@ -80,7 +83,7 @@
 					<div><input type="text" th:field="*{username}" placeHolder="Name"/></div>
 					<div><input  type="password" th:field="*{password}"  placeHolder="Password"/></div>
 					<input type="hidden" th:field="*{groupId}" value="${groupId}" />
-					<button name="submit" type="submit" >Login...</button><button>cancel</button>
+					<button name="submit" type="submit" >Login...</button><button type="reset" id="cancelLogin">Cancel</button>
 				</form>
 			</div>
 		</div>

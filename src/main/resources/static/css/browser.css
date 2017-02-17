@@ -15,9 +15,14 @@ body {
 .groupId {
 	font-size: xx-large;
 	font-weight: bolder;
-	display: inline-block;
 	padding-left: 20px;
 	vertical-align: top;
+}
+
+.productId {
+	display: inline-block;
+	vertical-align: top;
+	line-height: 25px;
 }
 
 .logo {
@@ -64,13 +69,18 @@ body {
 	font-size: 12px;
 	font-weight: bold;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.76);
-	display: inline-block;
-	margin-left: 0px;
+	margin-left: 20px;
 	cursor: pointer;
 }
 
+a.login{
+		margin-left:0px;
+	    text-decoration:none;
+	    color: white;
+	    
+}
+
 .login:hover {
-	font-size: 14px;
 	font-weight: bolder;
 }
 
@@ -94,6 +104,7 @@ body {
 	border: thin solid black;
 	border-radius: 5px;
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	display: none;
 }
 
 .search {
@@ -149,7 +160,7 @@ body {
 	background-color: #f5f6f7;
 	height: 35px;
 	cursor: default;
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	border-bottom: thin solid #e0e2e6;
 }
 
 .fileRow:hover {
@@ -172,7 +183,7 @@ body {
 	width: 18px;
 	height: 18px;
 	border-radius: 10px;
-	background-color: red;
+	background-color: #fb4536;
 	color: white;
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 	font-size: 30px;
@@ -180,17 +191,17 @@ body {
 	text-align: center;
 	vertical-align: middle;
 	line-height: 13px;
-	margin: 10px;
+	margin: 11px;
 }
 
 .fileRmBtn:hover {
-	background-color: #932e2e;
+	background-color: #dd4c1f;
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
 	cursor: pointer;
 }
 
 .fileNameColumn {
-	width: 288px;
+	width: 293px;
 	display: inline-block;
 	margin: 10px 0px 10px 10px;
 	cursor: pointer;
@@ -204,7 +215,7 @@ a.fileLink {
 }
 
 .fileDateColumn {
-	width: 286px;
+	width: 293px;
 	display: inline-block;
 	text-align: justify;
 	margin: 10px 0px 10px 0px;
@@ -217,7 +228,7 @@ a.fileLink {
 }
 
 .fileColumnHeader.fileTypeColumn {
-	width: 180px;
+	width: 275px;
 }
 
 .fileTypeColumn {
