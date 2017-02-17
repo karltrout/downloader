@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script src="/app.js"></script>
+
+
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<form id="loginForm" action="http://localhost:8080/fileBrowser/PERTI">
+						<span>Please Login...</span>
+						<div><input id="loginName" type="text" placeHolder="Name"/></div>
+						<div><input id="loginPassword" type="password" placeHolder="Password"/></div>
+						<button name="submit" type="submit" >Login...</button><button>cancel</button>
+		</form>	
+	</div>	
+</body>
+</html>

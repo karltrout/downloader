@@ -1,4 +1,18 @@
 // --------------------------------------------------------------------------------------
+// -- Assign the Login function
+// --------------------------------------------------------------------------------------
+$( "#login" ).click( function(){
+	
+	//alert ("gonna try and login?");
+	$( "#messageBox" ).show();
+	})
+
+$( "#cancelLogin" ).click(function (){
+	$( "#messageBox" ).hide();
+});
+
+
+// --------------------------------------------------------------------------------------
 // -- Assign the headers sort functions
 // --------------------------------------------------------------------------------------
 
@@ -101,5 +115,18 @@ $("div.mainBody").height($( window ).height() - 98 ); //66 is the size of the he
 $( document ).ready( function(){
 	
 	connect();
+	$( "#messageBox" ).hide();
 	
+   /* $("#loginForm").submit(function(e){
+
+        disconnect();
+    	console.log("submitted form with "+$( "#loginName" ).val()+":"+$( "#loginPassword" ).val());
+    	
+    	/*$.post( "/fileBrowser/PRODUCT1", 
+    			{ "username": $( "#loginName" ).val() , "password": $( "#loginPassword" ).val()}
+    	).done(function( data ) { $( "body" ).html(data);});
+        
+
+    });
+*/
 })

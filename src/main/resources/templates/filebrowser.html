@@ -9,7 +9,7 @@
 <script src="/app.js"></script>
 
 <link rel="stylesheet" type="text/css" href="/css/browser.css" />
-<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<!--link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" /-->
 
 <title th:text="${groupId}">Group File Browser</title>
 </head>
@@ -23,9 +23,13 @@
 				</div>
 				<div th:text="${groupId}" class="groupId">Group file list</div>
 			</div>
+			<div th:if="${user?.authenticated}" class="login">
+				<div th:text="'Welcome '+${user.getUsername()}">Welcome admin</div>
+				<div><span>logout...</span></div>
+			</div>
+			<div th:unless="${user?.authenticated}" class="login" id="login">login...</div>
 			<div class="searchText">
-				<input id="textSearch" type="text" class="search"
-					placeHolder="SEARCH" />
+				<input id="textSearch" type="text"  class="search" placeholder="SEARCH..." />
 				<div id="searchResults" class="searchResults">RESULTS....</div>
 			</div>
 		</div>
@@ -34,6 +38,7 @@
 				<span th:text="${#dates.format(day, 'dd-MMM-yyyy')}">The day
 					String</span>
 				<div class="fileHeader">
+				<div th:if="${user?.authenticated}" class="fileRmColumnHeader">Del</div>
 					<div class="fileColumnHeader fileNameSort">
 						File Name
 						<div class="sort-arrows">
@@ -53,6 +58,7 @@
 				</div>
 				<div class="dayfileRows">
 					<div th:each="file : ${days.get(day)}" class="fileRow">
+						<div th:if="${user?.authenticated}" class="fileRmBtn">-</div>
 						<div class="fileNameColumn">
 							<a th:href="@{/getFile(group=${groupId},file=${file.getName()})}"
 								th:text="${file.getName()}" class="fileLink">The File Name</a>
@@ -65,11 +71,21 @@
 							</div><img alt="type" th:src="${file.getIcon()}" class="typeIcon" />
 					</div>
 				</div>
+			</div>	
+		</div>
+		<div class="center alert" id="messageBox">
+			<div id="message" class="loginForm">
+				<form th:action="@{/authenticate}" th:object="${user}" method="post">
+					<span>Please Login...</span>
+					<div><input type="text" th:field="*{username}" placeHolder="Name"/></div>
+					<div><input  type="password" th:field="*{password}"  placeHolder="Password"/></div>
+					<input type="hidden" th:field="*{groupId}" value="${groupId}" />
+					<button name="submit" type="submit" >Login...</button><button>cancel</button>
+				</form>
 			</div>
 		</div>
 	</div>
 </body>
-
 <script type="text/javascript" src="/js/browser.js"></script>
 
 </html>

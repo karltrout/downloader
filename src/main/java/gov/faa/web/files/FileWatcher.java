@@ -7,7 +7,6 @@ import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,16 +17,17 @@ import java.nio.file.WatchService;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.messaging.support.GenericMessage;
 import org.springframework.stereotype.Component;
 
 import gov.faa.web.FileObject;
 
 @Component
 public class FileWatcher implements CommandLineRunner {
+
+	private static final boolean WATCHING = false;
 
 	private Logger logger = Logger.getLogger(getClass());
 	
@@ -38,14 +38,19 @@ public class FileWatcher implements CommandLineRunner {
 	@Autowired
 	private SimpMessagingTemplate messagingTemplate;
 
+	@Value("${files.location}")
+	String location;
+	String group = "PRODUCT1";
 	
 	@Override
 	public void run(String... args) throws Exception {
 
+		if (!WATCHING) return;
+		
 		WatchService watcher = FileSystems.getDefault().newWatchService();
 
 	
-		dir = Paths.get("/tmp/uploadedFiles/PERTI");
+		dir = Paths.get(location+group);
 
 		if (!Files.exists(dir)){
 			Files.createDirectories(dir);
@@ -91,21 +96,18 @@ public class FileWatcher implements CommandLineRunner {
 				// Verify that the new
 				// file is a text file.
 				Path child;
-				try {
+				
 					// Resolve the filename against the directory.
 					// If the filename is "test" and the directory is "foo",
 					// the resolved name is "test/foo".
 					child = dir.resolve(filename);
 					
-					String fileType = Files.probeContentType(child);
+				/*	String fileType = Files.probeContentType(child);
 					if (fileType != null && !Files.probeContentType(child).equals("text/plain")) {
 						System.err.format("New file '%s'" + " is not a plain text file.%n", filename);
 						continue;
 					}
-				} catch (IOException x) {
-					System.err.println(x);
-					continue;
-				}
+					*/
 
 				// Email the file to the
 				// specified email alias.
@@ -125,8 +127,10 @@ public class FileWatcher implements CommandLineRunner {
 				FileObject fo = new FileObject( newFile );
 				
 				logger.info("SENDING TO: "+ "/topic/fileWatcher");
-				
-				messagingTemplate.convertAndSend("/topic/fileWatcher", fo);
+				if (kind == ENTRY_CREATE) {
+					fo.setAction(kind.name());
+					messagingTemplate.convertAndSend("/topic/fileWatcher", fo);
+				}
 				
 				// Details left to reader....
 			}

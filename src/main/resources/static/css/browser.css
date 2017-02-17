@@ -42,7 +42,7 @@ body {
 	border-radius: 10px 10px 0px 0px;
 	border: 1px solid #ccc;
 	border-top: 0;
-	height: 70px;
+	height: 50px;
 	margin: auto;
 	width: 80%;
 	padding: 10px 20px 5px 20px;
@@ -58,6 +58,42 @@ body {
 .menuItem {
 	display: inline-block;
 	vertical-align: middle;
+}
+
+.login {
+	font-size: 12px;
+	font-weight: bold;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.76);
+	display: inline-block;
+	margin-left: 0px;
+	cursor: pointer;
+}
+
+.login:hover {
+	font-size: 14px;
+	font-weight: bolder;
+}
+
+.loginForm {
+	padding: 10px;
+}
+
+.center {
+	position: relative;
+	margin: 0;
+	position: absolute;
+	top: 45%;
+	left: 45%;
+	text-align: center;
+	font-size: 18px;
+	padding: 10px transform: translate(-50%, -50%);
+}
+
+.alert {
+	background-color: white;
+	border: thin solid black;
+	border-radius: 5px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .search {
@@ -107,19 +143,50 @@ body {
 	font-size: 16px;
 	padding-left: 0px;
 	display: inline-block;
-	
 }
 
 .fileRow {
 	background-color: #f5f6f7;
 	height: 35px;
 	cursor: default;
-	
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .fileRow:hover {
 	background-color: #c9e3fd;
+}
+
+.fileRmColumnHeader {
+	display: inline-block;
+	width: 20px;
+	height: 20px;;
+	font-weight: 700;
+	font-size: 16px;
+	padding-right: 20px;
+}
+
+.fileRmBtn {
+	display: inline-block;
+	position: relative;
+	bottom: 10px;
+	width: 18px;
+	height: 18px;
+	border-radius: 10px;
+	background-color: red;
+	color: white;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	font-size: 30px;
+	font-weight: bolder;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 13px;
+	margin: 10px;
+}
+
+.fileRmBtn:hover {
+	background-color: #932e2e;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+	cursor: pointer;
 }
 
 .fileNameColumn {
@@ -221,12 +288,17 @@ a.fileLink {
 	border-right: 5px solid white;
 }
 
-.newrowAnime{
+.newrowAnime {
 	animation-name: newrow;
 	animation-duration: 5s;
 }
 
-@keyframes newrow {
-	from 	{ background-color: rgb(164, 190, 215);}
-	to 		{ background-color: #f5f6f7 }
+@
+keyframes newrow {from { background-color:rgb(164, 190, 215);
+	
+}
+
+to {
+	background-color: #f5f6f7
+}
 }

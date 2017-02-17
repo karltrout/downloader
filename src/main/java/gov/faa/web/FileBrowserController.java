@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.ProcessBuilder.Redirect;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
@@ -25,7 +26,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import gov.faa.web.properties.FileStoreProperties;
@@ -38,9 +41,27 @@ public class FileBrowserController {
 
 	Logger logger = Logger.getLogger(getClass());
 	
+    @PostMapping("/authenticate")
+    public String authenticateUser(@ModelAttribute UserObject user, Model model) {
+    	
+    	logger.info("User: "+user.getUsername()+" PW: "+user.getPassword()+" GRP: "+user.getGroupId());
+    	
+    	/* Call Authentication rest service here.
+    	 * Assign authentication to user. 
+    	 * ?put JWT into Headers?
+    	 * 
+    	 */
 
+    	user.setAuthenticated(true);
+    	model.addAttribute("user", user);
+    
+        return this.browseFiles(user.getGroupId(), model);
+    }
 	 
-	
+	@GetMapping("/testing")
+	public String test(){
+		return "test";
+	}
 	
 	@GetMapping("/fileBrowser/{groupId}")
     public String browseFiles(@PathVariable String groupId, Model model) {
@@ -101,6 +122,12 @@ public class FileBrowserController {
     	model.addAttribute("groupId", groupId);
     	model.addAttribute("days", days);
     	
+    	if(!model.containsAttribute("user")){
+	    	UserObject user = new UserObject();
+	    	user.setGroupId(groupId);
+	        model.addAttribute("user", user);
+    	}
+        
     	return "filebrowser";
 
     }

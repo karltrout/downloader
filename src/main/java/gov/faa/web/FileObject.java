@@ -12,6 +12,8 @@ public class FileObject{
 	private String type = "unknown";
 	private String icon = "/images/default.png";
 	
+	private String action;
+	
 	public FileObject(File file){
 		this.setName(file.getName());
 		this.setDate(new Date(file.lastModified()));
@@ -99,5 +101,13 @@ public class FileObject{
 	
 	public String getIcon(){
 		return this.icon;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
 	}
 }

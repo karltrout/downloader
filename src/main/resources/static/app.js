@@ -54,21 +54,7 @@ function testSend() {
 function updateFileList(file) {
 	
 	//Update File List Div with new File Divs
-   
-/*<div th:each="file : ${days.get(day)}" class="fileRow">
-	<div class="fileNameColumn">
-		<a th:href="@{/getFile(group=${groupId},file=${file.getName()})}"
-			th:text="${file.getName()}" class="fileLink">The File Name</a>
-	</div>
-	<div th:text="${file.getDate()}" class="fileDateColumn">file
-		date</div>
-	<div th:text="${file.getSize()}"
-		class="fileSizeColumn fileSizeCell">file Size</div>
-	<div th:text="${file.getType()}"
-		class="fileTypeColumn fileSizeCell">file Type</div>
-	<img alt="type" th:src="${file.getIcon()}" class="typeIcon" />
-</div>
-	*/
+
 	console.log("Recieved Update: "+file);
 	
 	var fileRow     = document.createElement( "div" );
@@ -101,7 +87,7 @@ function updateFileList(file) {
 	$(fileIcon).attr('src',file.icon);
 	
 	
-	$(fileLink).attr('href', "/getFile?group=PERTI&file="+file.name);
+	$(fileLink).attr('href', "/getFile?group=PRODUCT1&file="+file.name);
 	$(fileLink).text(file.name);
 	
 	$(fileNameCol).append(fileLink);
@@ -119,11 +105,4 @@ function updateFileList(file) {
     console.log("Prepended row for File: "+file.name+" with TS: "+file.date);
     
 }
-
-$(function () {
-    $("form").on('submit', function (e) {
-        e.preventDefault();
-    });
-    $( "#send" ).click(function() { testSend(); });
-});
 
